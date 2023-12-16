@@ -6,8 +6,22 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
+import { db, storage } from "../../main";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect } from "react";
 
 export const LunchCard = () => {
+
+    useEffect(() => {
+        const fetchLunchInfo = async () => {
+            const querySnapshot = await getDocs(collection(db, "menu"));
+            querySnapshot.forEach((doc) => {
+                console.log(`${doc.id} => ${doc.data()}`);
+            });
+        };
+        fetchLunchInfo();
+    }, [])
+
     return (
         <Card className="mt-6 w-96" placeholder={undefined}>
             <CardHeader color="blue-gray" className="relative h-56" placeholder={undefined}>
