@@ -79,7 +79,7 @@ function NavList({ isLogin }: NavListProps) {
               placeholder={undefined}
             >
               <a
-                href="/Admin"
+                href="/admin"
                 className="flex items-center hover:text-orange-500 transition-colors"
                 onClick={handleHome}
               >
