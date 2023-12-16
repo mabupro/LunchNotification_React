@@ -34,15 +34,19 @@ export const Menu: React.FC = () => {
 
     return (
         <>
-            {menuData.map((menuItem) => (
-                <LunchCard
-                    key={menuItem.filename}
-                    name={menuItem.name}
-                    // fileName={menuItem.filename}
-                    price={menuItem.price}
-                    isSoldOut={menuItem.is_soldout}
-                />
-            ))}
+            <div className="flex items-center justify-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-5 w-full">
+                    {menuData.map((menuItem) => (
+                            <LunchCard
+                                key={menuItem.filename}
+                                name={menuItem.name}
+                                // fileName={menuItem.filename}
+                                price={menuItem.price}
+                                isSoldOut={menuItem.is_soldout}
+                            />
+                        ))}
+                </div>
+            </div>
         </>
     );
 };

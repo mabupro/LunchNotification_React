@@ -16,7 +16,7 @@ type LunchCardProps = {
 
 export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut }) => {
     return (
-        <Card className="mt-6 w-96" placeholder={undefined}>
+        <Card className="mt-6 max-w-96 w-full" placeholder={undefined}>
             <CardHeader color="blue-gray" className="relative h-56" children={undefined} placeholder={undefined}>
                 {/* Your image here */}
                 
@@ -26,7 +26,7 @@ export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut }) 
                     {name}
                 </Typography>
                 <Typography placeholder={undefined}>
-                    Price: ${price}
+                    Price: {price}円
                     <br />
                     {isSoldOut ? 'Sold Out' : 'Available'}
                 </Typography>
@@ -35,6 +35,6 @@ export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut }) 
             <CardFooter className="pt-0" placeholder={undefined}>
                 <Button placeholder={undefined}>Change Style</Button>
             </CardFooter>
-        </Card >
+        </Card>
     );
 };
