@@ -8,3 +8,4 @@
 - npm i @material-tailwind/react
 - npm i firebase
 - npm i -g firebase-tools
+- npm i react-router-dom
