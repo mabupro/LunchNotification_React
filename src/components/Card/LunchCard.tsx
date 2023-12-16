@@ -1,5 +1,3 @@
-// LunchCard.tsx
-
 import React from 'react';
 import {
     Card,
@@ -21,6 +19,7 @@ export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut }) 
         <Card className="mt-6 w-96" placeholder={undefined}>
             <CardHeader color="blue-gray" className="relative h-56" children={undefined} placeholder={undefined}>
                 {/* Your image here */}
+                
             </CardHeader>
             <CardBody placeholder={undefined}>
                 <Typography variant="h5" color="blue-gray" className="mb-2" placeholder={undefined}>
