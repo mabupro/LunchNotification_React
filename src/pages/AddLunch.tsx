@@ -5,8 +5,10 @@ import UploadImage from "../components/UploadImage";
 import { addDoc, collection } from "firebase/firestore";
 import { db, storage } from "../../.firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 const AddLunch: React.FC = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<string>("");
 
@@ -38,13 +40,16 @@ const AddLunch: React.FC = () => {
   const handleAddMenu = async () => {
     // メニューデータをFirestoreに追加
     try {
-      const docRef = await addDoc(collection(db, "menu"), {
+      await addDoc(collection(db, "menu"), {
         name,
         price,
         file_name: "",
         is_soldout: false,
       });
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
+
+      // メニュー追加後にAdminページに戻る
+      navigate('/Admin');
     } catch (e) {
       console.error("Error adding document: ", e);
     }
