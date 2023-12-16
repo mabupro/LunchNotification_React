@@ -8,7 +8,7 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function NavList() {
-    const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {/* <Typography
@@ -30,19 +30,19 @@ function NavList() {
         </a>
       </Typography> */}
       <Typography
-              as="li"
-              variant="small"
-              color="blue-gray"
-              className="p-1 font-medium" placeholder={undefined}      >
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium" placeholder={undefined}      >
         <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
           Login
         </a>
       </Typography>
       <Typography
-              as="li"
-              variant="small"
-              color="blue-gray"
-              className="p-1 font-medium" placeholder={undefined}      >
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium" placeholder={undefined}      >
         <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
           Logout
         </a>
@@ -50,39 +50,39 @@ function NavList() {
     </ul>
   );
 }
- 
+
 export const Header = () => {
   const [openNav, setOpenNav] = React.useState(false);
- 
+
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
- 
+
   React.useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
- 
+
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
- 
+
   return (
     <Navbar className="mx-auto max-w-screen-xl px-6 py-3" placeholder={undefined}>
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
-                  as="a"
-                  href="#"
-                  variant="h6"
-                  className="mr-4 cursor-pointer py-1.5" placeholder={undefined}        >
+          as="a"
+          href="#"
+          variant="h6"
+          className="mr-4 cursor-pointer py-1.5" placeholder={undefined}        >
           Lunch Notification
         </Typography>
         <div className="hidden lg:block">
           <NavList />
         </div>
         <IconButton
-                  variant="text"
-                  className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-                  ripple={false}
-                  onClick={() => setOpenNav(!openNav)} placeholder={undefined}        >
+          variant="text"
+          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          ripple={false}
+          onClick={() => setOpenNav(!openNav)} placeholder={undefined}        >
           {openNav ? (
             <XMarkIcon className="h-6 w-6" strokeWidth={2} />
           ) : (
