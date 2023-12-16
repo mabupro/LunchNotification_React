@@ -13,22 +13,31 @@ const AddLunch: React.FC = () => {
   const [price, setPrice] = useState<string>("");
 
   const handleReview = async (selectedImage: File | null) => {
-    // ここに画像に対する批評のロジックを追加する
+    // 画像に対する批評のロジック
     if (selectedImage) {
       try {
         // ストレージの参照を作成
         const storageRef = ref(storage, "images/" + selectedImage.name);
   
         // ファイルをアップロード
-        await uploadBytes(storageRef, selectedImage);
+        const snapshot = await uploadBytes(storageRef, selectedImage);
   
         // ダウンロード URL を取得
         const downloadURL = await getDownloadURL(storageRef);
-        
-        // ダウンロード URL で何かを行います。例えば、画像を表示するか Firestore に保存するかです
-        console.log("Download URL:", downloadURL);
   
-        // これで、ダウンロード URL を使って画像を表示するか、Firestore に保存するなどができます
+        // 画像のメタデータを取得
+        const metadata = snapshot.metadata;
+  
+        // FirestoreにメタデータやダウンロードURLを保存
+        await addDoc(collection(db, "menu"), {
+          name,
+          price,
+          file_name: metadata.name, // ファイル名を保存する例
+          download_url: downloadURL, // ダウンロードURLを保存する例
+          is_soldout: false,
+        });
+  
+        console.log("Download URL:", downloadURL);
       } catch (error) {
         console.error("Firebase Storage への画像のアップロードエラー:", error);
       }
@@ -36,6 +45,7 @@ const AddLunch: React.FC = () => {
       console.log("画像が選択されていません");
     }
   };
+  
 
   const handleAddMenu = async () => {
     // メニューデータをFirestoreに追加
