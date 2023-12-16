@@ -7,7 +7,7 @@ import { db, storage } from "../../.firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddLunch: React.FC = () => {
-  const [menuName, setMenuName] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<string>("");
 
   const handleReview = async (selectedImage: File | null) => {
@@ -41,7 +41,7 @@ const AddLunch: React.FC = () => {
       const docRef = await addDoc(collection(db, "menu"), {
         name,
         price,
-        file_name: "../assets/gyutan.jpg",
+        file_name: "",
         is_soldout: false,
       });
       console.log("Document written with ID: ", docRef.id);
@@ -69,8 +69,8 @@ const AddLunch: React.FC = () => {
           <Input
             size="lg"
             placeholder="唐揚げ定食"
-            value={menuName}
-            onChange={(e) => setMenuName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className=" !border-t-blue-gray-200 focus:!border-orange-500"
             labelProps={{
               className: "before:content-none after:content-none",
