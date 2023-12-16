@@ -5,12 +5,19 @@ import { addDoc, collection } from "firebase/firestore";
 import { db, storage } from "../../.firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../components/Header";
+
+type NavListProps = {
+  isLogin: boolean;
+};
 
 const AddLunch: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [downloadURL, setDownloadURL] = useState<string | null>(null);
+
+  const isLogin = false; 
 
   const handleReview = async (selectedImage: File | null) => {
     // 画像に対する批評のロジック
@@ -58,6 +65,8 @@ const AddLunch: React.FC = () => {
   };
 
   return (
+    <>
+    <Header isLogin={isLogin} />
     <Card
       color="transparent"
       shadow={false}
@@ -105,6 +114,8 @@ const AddLunch: React.FC = () => {
         </Button>
       </form>
     </Card>
+    </>
+    
   );
 };
 

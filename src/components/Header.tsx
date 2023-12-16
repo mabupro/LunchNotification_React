@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Navbar,
   Collapse,
@@ -16,6 +17,8 @@ type NavListProps = {
 
 function NavList({ isLogin }: NavListProps) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleGoogleLogin = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -37,10 +40,32 @@ function NavList({ isLogin }: NavListProps) {
     }
   };
 
+  const handleHome = () => {
+    navigate("/");
+  }
+
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {isLogin ? (
         <>
+        {currentPath === "/add" ?
+          <Typography
+            as="li"
+            key="login"
+            variant="small"
+            color="blue-gray"
+            className="p-1 font-medium"
+            placeholder={undefined}
+          >
+            <a
+              href="/Admin"
+              className="flex items-center hover:text-orange-500 transition-colors"
+              onClick={handleHome}
+            >
+              Home
+            </a>
+          </Typography>
+          : null}
           <Typography
             as="li"
             key="add"
@@ -72,6 +97,25 @@ function NavList({ isLogin }: NavListProps) {
         </>
       ) : (
         <>
+        {currentPath === "/add" ?
+        <Typography
+        as="li"
+        key="login"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium"
+        placeholder={undefined}
+      >
+        <a
+          href="/Admin"
+          className="flex items-center hover:text-orange-500 transition-colors"
+          onClick={handleHome}
+        >
+          Home
+        </a>
+      </Typography>
+        : null}
+          
           <Typography
             as="li"
             key="login"
