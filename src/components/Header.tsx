@@ -39,7 +39,7 @@ function NavList({ isLogin }: NavListProps) {
 
       if (isAdmin) {
         // ユーザーは管理者の場合、Adminページに移動します
-        navigate('/Admin');
+        navigate('/admin');
       } else {
         // ユーザーが管理者でない場合、適切に処理します（例：エラーメッセージを表示）
         console.error('ユーザーは管理者ではありません。');
