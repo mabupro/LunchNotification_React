@@ -97,7 +97,7 @@ const AddLunch: React.FC = () => {
           </Typography>
           <Input
             size="lg"
-            placeholder="430円"
+            placeholder="430"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             className=" !border-t-blue-gray-200 focus:!border-orange-500"

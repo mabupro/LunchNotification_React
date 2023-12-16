@@ -18,8 +18,8 @@ type LunchCardProps = {
 export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut, downloadUrl }) => {
     return (
         <Card className="mt-6 max-w-96 w-full" placeholder={undefined}>
-            <CardHeader color="blue-gray" className="relative h-56" placeholder={undefined}>
-                <img src={downloadUrl} alt={name} className="w-full h-full object-cover" />
+            <CardHeader  className="h-56" placeholder={undefined}>
+                <img src={downloadUrl} alt={name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-100" />
             </CardHeader>
             <CardBody placeholder={undefined}>
                 <Typography variant="h5" color="blue-gray" className="mb-2" placeholder={undefined}>
