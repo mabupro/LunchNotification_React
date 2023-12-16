@@ -8,7 +8,8 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '../../.firebase/firebase';
+import { auth, db, googleProvider } from '../../.firebase/firebase';
+import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 type NavListProps = {
@@ -20,15 +21,33 @@ function NavList({ isLogin }: NavListProps) {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  if(currentPath == "/add") isLogin = true;
+  if (currentPath == "/add") isLogin = true;
 
   const handleGoogleLogin = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+
     try {
-      await signInWithPopup(auth, googleProvider);
-      navigate('/admin');
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      // Firestoreコレクションが「admin」であると仮定します
+      const adminCollectionRef = collection(db, 'admin');
+      const adminQuerySnapshot = await getDocs(adminCollectionRef);
+
+      // ユーザーのUIDが「admin」ドキュメントのいずれかに存在するか確認します
+      const isAdmin = adminQuerySnapshot.docs.some(doc => doc.data().gmail === user.email);
+
+      if (isAdmin) {
+        // ユーザーは管理者の場合、Adminページに移動します
+        navigate('/Admin');
+      } else {
+        // ユーザーが管理者でない場合、適切に処理します（例：エラーメッセージを表示）
+        console.error('ユーザーは管理者ではありません。');
+        // ユーザーをログアウトします
+        await auth.signOut();
+      }
     } catch (error) {
-      console.error('Google login error:', error);
+      console.error('Googleログインエラー：', error);
     }
   };
 
@@ -50,38 +69,38 @@ function NavList({ isLogin }: NavListProps) {
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {isLogin ? (
         <>
-        {currentPath === "/add" ?
-          <Typography
-            as="li"
-            key="login"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-medium"
-            placeholder={undefined}
-          >
-            <a
-              href="/Admin"
-              className="flex items-center hover:text-orange-500 transition-colors"
-              onClick={handleHome}
+          {currentPath === "/add" ?
+            <Typography
+              as="li"
+              key="login"
+              variant="small"
+              color="blue-gray"
+              className="p-1 font-medium"
+              placeholder={undefined}
             >
-              Home
-            </a>
-          </Typography>
-          :           
-          <Typography
-          as="li"
-          key="add"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-medium"
-          placeholder={undefined}
-        >
-          <a href="/add"
-            className="flex items-center hover:text-orange-500 transition-colors"
-          >
-            add
-          </a>
-        </Typography>}
+              <a
+                href="/Admin"
+                className="flex items-center hover:text-orange-500 transition-colors"
+                onClick={handleHome}
+              >
+                Home
+              </a>
+            </Typography>
+            :
+            <Typography
+              as="li"
+              key="add"
+              variant="small"
+              color="blue-gray"
+              className="p-1 font-medium"
+              placeholder={undefined}
+            >
+              <a href="/add"
+                className="flex items-center hover:text-orange-500 transition-colors"
+              >
+                add
+              </a>
+            </Typography>}
 
           <Typography
             as="li"
@@ -100,25 +119,25 @@ function NavList({ isLogin }: NavListProps) {
         </>
       ) : (
         <>
-        {currentPath === "/add" ?
-        <Typography
-        as="li"
-        key="login"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-medium"
-        placeholder={undefined}
-      >
-        <a
-          href="/admin"
-          className="flex items-center hover:text-orange-500 transition-colors"
-          onClick={handleHome}
-        >
-          Home
-        </a>
-      </Typography>
-        : null}
-          
+          {currentPath === "/add" ?
+            <Typography
+              as="li"
+              key="login"
+              variant="small"
+              color="blue-gray"
+              className="p-1 font-medium"
+              placeholder={undefined}
+            >
+              <a
+                href="/admin"
+                className="flex items-center hover:text-orange-500 transition-colors"
+                onClick={handleHome}
+              >
+                Home
+              </a>
+            </Typography>
+            : null}
+
           <Typography
             as="li"
             key="login"
