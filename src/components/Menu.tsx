@@ -3,15 +3,19 @@ import { LunchCard } from './Card/LunchCard';
 import { db } from '../../.firebase/firebase';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 
-interface MenuData {
+type MenuData = {
     name: string;
     price: number;
     is_soldout: boolean;
     download_url: string;
     documentId: string;
-}
+};
 
-export const Menu: React.FC = () => {
+type MenuProps = {
+    isLogin: boolean;
+};
+
+export const Menu: React.FC<MenuProps> = ({ isLogin }) => {
     const [menuData, setMenuData] = useState<MenuData[]>([]);
 
     const fetchMenuList = async () => {
@@ -55,7 +59,8 @@ export const Menu: React.FC = () => {
                             price={menuItem.price}
                             documentId={menuItem.documentId}
                             isSoldOut={menuItem.is_soldout}
-                            onUpdateSoldOut={handleUpdateSoldOut} // Pass the function
+                            onUpdateSoldOut={handleUpdateSoldOut} 
+                            isLogin={isLogin} 
                         />
                     ))}
                 </div>

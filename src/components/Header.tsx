@@ -8,15 +8,20 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../../.firebase/firebase';
+import { useNavigate } from "react-router-dom";
 
-function NavList() {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+type NavListProps = {
+  isLogin: boolean;
+};
+
+function NavList({ isLogin }: NavListProps) {
+  const navigate = useNavigate();
 
   const handleGoogleLogin = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     try {
       await signInWithPopup(auth, googleProvider);
-      setIsLogin(true);
+      navigate('/Admin');
     } catch (error) {
       console.error('Google login error:', error);
     }
@@ -26,7 +31,7 @@ function NavList() {
     event.preventDefault();
     try {
       await auth.signOut();
-      setIsLogin(false);
+      navigate('/');
     } catch (error) {
       console.error('Google logout error:', error);
     }
@@ -89,7 +94,11 @@ function NavList() {
   );
 }
 
-export const Header = () => {
+type HeaderProps = {
+  isLogin: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ isLogin }) => {
   const [openNav, setOpenNav] = React.useState(false);
 
   const handleWindowResize = () =>
@@ -114,7 +123,7 @@ export const Header = () => {
           Lunch Notification
         </Typography>
         <div className="hidden lg:block">
-          <NavList />
+          <NavList isLogin={isLogin} />
         </div>
         <IconButton
           variant="text"
@@ -129,7 +138,7 @@ export const Header = () => {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <NavList isLogin={isLogin} />
       </Collapse>
     </Navbar>
   );
