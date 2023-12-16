@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -8,14 +8,15 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
  
 function NavList() {
+    const [isLogin, setIsLogin] = useState<boolean>(false);
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
+      {/* <Typography
               as="li"
               variant="small"
               color="blue-gray"
               className="p-1 font-medium" placeholder={undefined}      >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
+        <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
           Pages
         </a>
       </Typography>
@@ -24,17 +25,17 @@ function NavList() {
               variant="small"
               color="blue-gray"
               className="p-1 font-medium" placeholder={undefined}      >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
+        <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
           Account
         </a>
-      </Typography>
+      </Typography> */}
       <Typography
               as="li"
               variant="small"
               color="blue-gray"
               className="p-1 font-medium" placeholder={undefined}      >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Blocks
+        <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
+          Login
         </a>
       </Typography>
       <Typography
@@ -42,8 +43,8 @@ function NavList() {
               variant="small"
               color="blue-gray"
               className="p-1 font-medium" placeholder={undefined}      >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Docs
+        <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
+          Logout
         </a>
       </Typography>
     </ul>
@@ -72,7 +73,7 @@ export const Header = () => {
                   href="#"
                   variant="h6"
                   className="mr-4 cursor-pointer py-1.5" placeholder={undefined}        >
-          Material Tailwind
+          Lunch Notification
         </Typography>
         <div className="hidden lg:block">
           <NavList />
