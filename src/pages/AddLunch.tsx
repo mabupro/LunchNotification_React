@@ -7,9 +7,9 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 
-type NavListProps = {
-  isLogin: boolean;
-};
+// type NavListProps = {
+//   isLogin: boolean;
+// };
 
 const AddLunch: React.FC = () => {
   const navigate = useNavigate();
@@ -27,13 +27,14 @@ const AddLunch: React.FC = () => {
         const storageRef = ref(storage, "images/" + selectedImage.name);
 
         // ファイルをアップロード
-        const snapshot = await uploadBytes(storageRef, selectedImage);
+        // const snapshot = 
+        await uploadBytes(storageRef, selectedImage);
 
         // ダウンロード URL を取得
         const url = await getDownloadURL(storageRef);
 
         // 画像のメタデータを取得
-        const metadata = snapshot.metadata;
+        // const metadata = snapshot.metadata;
 
         // メタデータやダウンロードURLをセット
         setDownloadURL(url);
