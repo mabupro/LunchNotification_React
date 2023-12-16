@@ -20,6 +20,8 @@ function NavList({ isLogin }: NavListProps) {
   const location = useLocation();
   const currentPath = location.pathname;
 
+  if(currentPath == "/add") isLogin = true;
+
   const handleGoogleLogin = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     try {
@@ -65,21 +67,22 @@ function NavList({ isLogin }: NavListProps) {
               Home
             </a>
           </Typography>
-          : null}
+          :           
           <Typography
-            as="li"
-            key="add"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-medium"
-            placeholder={undefined}
+          as="li"
+          key="add"
+          variant="small"
+          color="blue-gray"
+          className="p-1 font-medium"
+          placeholder={undefined}
+        >
+          <a href="/add"
+            className="flex items-center hover:text-orange-500 transition-colors"
           >
-            <a href="/add"
-              className="flex items-center hover:text-orange-500 transition-colors"
-            >
-              add
-            </a>
-          </Typography>
+            add
+          </a>
+        </Typography>}
+
           <Typography
             as="li"
             key="logout"
