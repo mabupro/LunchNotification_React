@@ -1,4 +1,4 @@
-### setup
+### setup_command
 
 - npm create vite
 - npm i
