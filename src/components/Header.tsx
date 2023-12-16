@@ -24,7 +24,7 @@ function NavList({ isLogin }: NavListProps) {
     event.preventDefault();
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate('/Admin');
+      navigate('/admin');
     } catch (error) {
       console.error('Google login error:', error);
     }
@@ -74,7 +74,7 @@ function NavList({ isLogin }: NavListProps) {
             className="p-1 font-medium"
             placeholder={undefined}
           >
-            <a href="/Add-Lunch"
+            <a href="/add"
               className="flex items-center hover:text-orange-500 transition-colors"
             >
               add
@@ -107,7 +107,7 @@ function NavList({ isLogin }: NavListProps) {
         placeholder={undefined}
       >
         <a
-          href="/Admin"
+          href="/admin"
           className="flex items-center hover:text-orange-500 transition-colors"
           onClick={handleHome}
         >
@@ -125,7 +125,7 @@ function NavList({ isLogin }: NavListProps) {
             placeholder={undefined}
           >
             <a
-              href="/Admin"
+              href="/admin"
               className="flex items-center hover:text-orange-500 transition-colors"
               onClick={handleGoogleLogin}
             >
