@@ -46,7 +46,7 @@ function NavList() {
           >
             <a href="/Add-Lunch"
               className="flex items-center hover:text-orange-500 transition-colors"
-              onClick={handleGoogleLogin}>
+            >
               add
             </a>
           </Typography>
