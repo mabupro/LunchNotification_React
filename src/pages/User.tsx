@@ -6,5 +6,5 @@ export const User = () => {
         <div>
             <Header />
         </div>
-    );
+    )
 }
