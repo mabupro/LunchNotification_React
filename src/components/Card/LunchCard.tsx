@@ -14,10 +14,11 @@ type LunchCardProps = {
     isSoldOut: boolean;
     downloadUrl: string;
     documentId: string;
-    onUpdateSoldOut: (documentId: string, isSoldOut: boolean) => void; 
+    onUpdateSoldOut: (documentId: string, isSoldOut: boolean) => void;
+    isLogin: boolean;
 }
 
-export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut, downloadUrl, documentId, onUpdateSoldOut }) => {
+export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut, downloadUrl, documentId, onUpdateSoldOut, isLogin }) => {
 
     const handleUpdateSoldOut = () => {
         onUpdateSoldOut(documentId, !isSoldOut);
@@ -39,9 +40,11 @@ export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut, do
                 </Typography>
             </CardBody>
             <CardFooter className="pt-0" placeholder={undefined}>
-                <Button onClick={handleUpdateSoldOut} placeholder={undefined}>
-                    {isSoldOut ? 'Mark Available' : 'Mark Sold Out'}
-                </Button>
+                {isLogin && (
+                    <Button onClick={handleUpdateSoldOut} placeholder={undefined}>
+                        {isSoldOut ? 'Mark Available' : 'Mark Sold Out'}
+                    </Button>
+                )}
             </CardFooter>
         </Card>
     );
