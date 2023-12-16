@@ -27,7 +27,11 @@ export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut, do
     return (
         <Card className="mt-6 max-w-96 w-full" placeholder={undefined}>
             <CardHeader className="h-56" placeholder={undefined}>
-                <img src={downloadUrl} alt={name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-100" />
+            <img
+                src={downloadUrl}
+                alt={name}
+                className={`w-full h-full object-cover hover:scale-110 transition-transform duration-300 ${isSoldOut ? 'filter grayscale' : ''}`}
+            />
             </CardHeader>
             <CardBody placeholder={undefined}>
                 <Typography variant="h5" color="blue-gray" className="mb-2" placeholder={undefined}>
@@ -36,12 +40,14 @@ export const LunchCard: React.FC<LunchCardProps> = ({ name, price, isSoldOut, do
                 <Typography placeholder={undefined}>
                     Price: {price}円
                     <br />
-                    {isSoldOut ? 'Sold Out' : 'Available'}
+                    {isSoldOut ? <span className={`text-${isSoldOut ? 'red' : 'green'}-500`}>Sold Out</span> : <span className={`text-${isSoldOut ? 'red' : 'green'}-500`}>Available</span>}
                 </Typography>
             </CardBody>
             <CardFooter className="pt-0" placeholder={undefined}>
                 {isLogin && (
-                    <Button onClick={handleUpdateSoldOut} placeholder={undefined}>
+                    <Button
+                        onClick={handleUpdateSoldOut}
+                        className={`bg-${isSoldOut ? 'green' : 'red'}-500`} placeholder={undefined}                    >
                         {isSoldOut ? 'Mark Available' : 'Mark Sold Out'}
                     </Button>
                 )}
