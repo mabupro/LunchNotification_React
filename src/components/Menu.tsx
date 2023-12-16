@@ -5,9 +5,9 @@ import { collection, getDocs } from 'firebase/firestore';
 
 interface MenuData {
     name: string;
-    filename: string;
     price: number;
     is_soldout: boolean;
+    download_url: string;
 }
 
 export const Menu: React.FC = () => {
@@ -38,9 +38,9 @@ export const Menu: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-5 w-full">
                     {menuData.map((menuItem) => (
                             <LunchCard
-                                key={menuItem.filename}
+                                key={menuItem.name}
                                 name={menuItem.name}
-                                // fileName={menuItem.filename}
+                                downloadUrl={menuItem.download_url}
                                 price={menuItem.price}
                                 isSoldOut={menuItem.is_soldout}
                             />
