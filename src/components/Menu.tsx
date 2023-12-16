@@ -35,7 +35,7 @@ export const Menu: React.FC = () => {
     return (
         <>
             <div className="flex items-center justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-5 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10 mx-5 w-full">
                     {menuData.map((menuItem) => (
                             <LunchCard
                                 key={menuItem.name}
