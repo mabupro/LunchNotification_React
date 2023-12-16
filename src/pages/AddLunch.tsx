@@ -1,4 +1,3 @@
-// src/pages/AddLunch.tsx
 import React, { useState } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import UploadImage from "../components/UploadImage";
@@ -11,6 +10,7 @@ const AddLunch: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<string>("");
+  const [downloadURL, setDownloadURL] = useState<string | null>(null);
 
   const handleReview = async (selectedImage: File | null) => {
     // 画像に対する批評のロジック
@@ -18,26 +18,20 @@ const AddLunch: React.FC = () => {
       try {
         // ストレージの参照を作成
         const storageRef = ref(storage, "images/" + selectedImage.name);
-  
+
         // ファイルをアップロード
         const snapshot = await uploadBytes(storageRef, selectedImage);
-  
+
         // ダウンロード URL を取得
-        const downloadURL = await getDownloadURL(storageRef);
-  
+        const url = await getDownloadURL(storageRef);
+
         // 画像のメタデータを取得
         const metadata = snapshot.metadata;
-  
-        // FirestoreにメタデータやダウンロードURLを保存
-        await addDoc(collection(db, "menu"), {
-          name,
-          price,
-          file_name: metadata.name, // ファイル名を保存する例
-          download_url: downloadURL, // ダウンロードURLを保存する例
-          is_soldout: false,
-        });
-  
-        console.log("Download URL:", downloadURL);
+
+        // メタデータやダウンロードURLをセット
+        setDownloadURL(url);
+
+        console.log("Download URL:", url);
       } catch (error) {
         console.error("Firebase Storage への画像のアップロードエラー:", error);
       }
@@ -45,7 +39,6 @@ const AddLunch: React.FC = () => {
       console.log("画像が選択されていません");
     }
   };
-  
 
   const handleAddMenu = async () => {
     // メニューデータをFirestoreに追加
@@ -53,10 +46,9 @@ const AddLunch: React.FC = () => {
       await addDoc(collection(db, "menu"), {
         name,
         price,
-        file_name: "",
+        download_url: downloadURL,
         is_soldout: false,
       });
-      // console.log("Document written with ID: ", docRef.id);
 
       // メニュー追加後にAdminページに戻る
       navigate('/Admin');
