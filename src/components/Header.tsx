@@ -19,16 +19,16 @@ function NavList() {
         <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
           Pages
         </a>
-      </Typography>
+      </Typography> */}
       <Typography
               as="li"
               variant="small"
               color="blue-gray"
               className="p-1 font-medium" placeholder={undefined}      >
         <a href="#" className="flex items-center hover:text-orange-500 transition-colors">
-          Account
+          add
         </a>
-      </Typography> */}
+      </Typography>
       <Typography
         as="li"
         variant="small"
